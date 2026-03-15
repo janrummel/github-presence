@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- ============================================================
+         META — Replace all {{PLACEHOLDER}} values before publishing
+         ============================================================ -->
+    <title>{{PROJECT_NAME}} — {{TAGLINE}}</title>
+    <meta name="description" content="{{META_DESCRIPTION}}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{PROJECT_NAME}} — {{TAGLINE}}">
+    <meta property="og:description" content="{{OG_DESCRIPTION}}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{CANONICAL_URL}}">
+    <meta property="og:image" content="{{OG_IMAGE_URL}}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{PROJECT_NAME}} — {{TAGLINE}}">
+    <meta name="twitter:description" content="{{TWITTER_DESCRIPTION}}">
+
+    <!-- Fonts (same stack as CloakCode — swap if needed) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+    <!-- Design system CSS — lives one level up from /templates -->
+    <link rel="stylesheet" href="../design-system/github-presence.css">
+</head>
+<body>
+
+<!-- Skip link for keyboard / screen-reader users -->
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="container" id="main">
+
+    <!-- ============================================================
+         SECTION 1 — HERO
+         Purpose: First impression. Communicates what the tool is
+         and gives the visitor a reason to keep reading.
+
+         Replace:
+           {{PROJECT_EMOJI}}   — single emoji representing the project (e.g. 🔒)
+           {{PROJECT_NAME}}    — tool name (e.g. CloakCode)
+           {{TAGLINE}}         — one-sentence value proposition
+           {{BADGE_1..3}}      — short capability badges (e.g. "Open Source")
+           {{GITHUB_URL}}      — full GitHub repo URL
+           {{HOW_ANCHOR}}      — anchor id of the "How it works" section (e.g. #how)
+         ============================================================ -->
+    <header class="hero">
+        <h1 class="sr-only">{{PROJECT_NAME}}</h1>
+
+        <div class="hero-logo animate-in">
+            <!-- Option A: use an SVG logo file -->
+            <!-- <img src="logo.svg" alt="{{PROJECT_NAME}} logo" class="mascot" width="90" height="90"> -->
+
+            <!-- Option B: large emoji (simpler, works without assets) -->
+            <div class="hero-emoji" aria-hidden="true">{{PROJECT_EMOJI}}</div>
+
+            <!-- Option C: ASCII art block — paste art between <pre> tags -->
+            <!-- <pre class="logo" aria-label="{{PROJECT_NAME}} ASCII art logo">{{ASCII_ART}}</pre> -->
+        </div>
+
+        <p class="tagline animate-in delay-1">{{TAGLINE}}</p>
+
+        <div class="badges animate-in delay-2">
+            <span class="badge">{{BADGE_1}}</span>
+            <span class="badge">{{BADGE_2}}</span>
+            <span class="badge">{{BADGE_3}}</span>
+            <!-- Add more <span class="badge"> as needed -->
+        </div>
+
+        <div class="cta animate-in delay-2">
+            <a href="{{GITHUB_URL}}" class="btn-primary">Get {{PROJECT_NAME}}</a>
+            <a href="{{HOW_ANCHOR}}" class="btn-secondary">See how it works</a>
+        </div>
+    </header>
+
+
+    <!-- ============================================================
+         SECTION 2 — TERMINAL DEMO
+         Purpose: Show the tool in action immediately. Concrete output
+         builds more trust than any feature list.
+
+         Replace:
+           {{TERMINAL_COMMAND}}   — the command a user would run
+           {{TERMINAL_OUTPUT_*}}  — each output line (split for staggered CSS animation)
+           {{TERMINAL_STATUS}}    — final status/success line
+           {{TERMINAL_DIM}}       — secondary info line (dim colour)
+
+         CSS classes for syntax colouring:
+           .term-prompt   — the $ prompt
+           .term-string   — string argument
+           .term-output   — neutral output text
+           .term-masked   — label for a masked/detected item
+           .term-placeholder — the replacement token
+           .term-success  — green success line
+           .term-dim      — muted/grey info line
+           .term-cursor   — blinking cursor block
+         ============================================================ -->
+    <section class="section animate-in">
+        <div class="terminal">
+            <div class="terminal-bar">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">Terminal</span>
+            </div>
+            <div class="terminal-body">
+                <!-- Primary command -->
+                <div class="term-line term-line-1">
+                    <span class="term-prompt">$</span> {{TERMINAL_COMMAND}}
+                </div>
+                <div class="term-line term-line-2"><br></div>
+                <!-- Tool output — add/remove lines as needed -->
+                <div class="term-line term-line-3">
+                    <span class="term-output">{{TERMINAL_OUTPUT_1}}</span>
+                </div>
+                <div class="term-line term-line-4">
+                    <span class="term-masked">  {{TERMINAL_OUTPUT_2_LABEL}}:</span>
+                    {{TERMINAL_OUTPUT_2_BEFORE}} → <span class="term-placeholder">{{TERMINAL_OUTPUT_2_AFTER}}</span>
+                </div>
+                <div class="term-line term-line-5">
+                    <span class="term-masked">  {{TERMINAL_OUTPUT_3_LABEL}}:</span>
+                    {{TERMINAL_OUTPUT_3_BEFORE}} → <span class="term-placeholder">{{TERMINAL_OUTPUT_3_AFTER}}</span>
+                </div>
+                <div class="term-line term-line-6"><br></div>
+                <!-- Second command -->
+                <div class="term-line term-line-7">
+                    <span class="term-prompt">$</span> {{TERMINAL_COMMAND_2}}
+                </div>
+                <div class="term-line term-line-8">
+                    <span class="term-success">{{TERMINAL_STATUS}}</span>
+                </div>
+                <div class="term-line term-line-9">
+                    <span class="term-dim">{{TERMINAL_DIM}}</span>
+                </div>
+                <div class="term-line term-line-10">
+                    <span class="term-cursor">█</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 3 — WHY (emotional hook)
+         Purpose: One punchy blockquote that frames the problem
+         emotionally, followed by a short clarifying paragraph.
+
+         Replace:
+           {{BLOCKQUOTE}}           — the headline statement (keep short)
+           {{BLOCKQUOTE_EMPHASIS}}  — the em-phasised phrase within it
+           {{WHY_BODY}}             — 2-3 sentence explanation of the problem
+         ============================================================ -->
+    <section class="section section-why animate-in">
+        <blockquote>
+            {{BLOCKQUOTE}} <em>{{BLOCKQUOTE_EMPHASIS}}</em>
+        </blockquote>
+        <p>{{WHY_BODY}}</p>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 4 — BEFORE / AFTER (interactive masking demo)
+         Purpose: Let the visitor interact with the core mechanic.
+         The JS toggleMask() function below drives this.
+
+         Replace:
+           {{DEMO_LABEL}}           — label above the demo pane
+           {{DEMO_INTRO}}           — one-sentence setup for the demo
+           {{DEMO_LINE_*_PREFIX}}   — static code prefix (e.g. variable name)
+           {{DEMO_LINE_*_SECRET}}   — the visible "before" value
+           {{DEMO_LINE_*_MASK}}     — the masked "after" value (data-mask attr)
+
+         The .secret elements are toggled by toggleMask() — keep data-mask.
+         ============================================================ -->
+    <section class="section animate-in">
+        <h2 class="section-heading">{{BEFORE_AFTER_HEADING}}</h2>
+        <p class="section-intro">{{BEFORE_AFTER_INTRO}}</p>
+
+        <div class="masking-demo">
+            <div class="demo-label">{{DEMO_LABEL}}</div>
+            <div class="demo-code">
+                <!-- Line 1 -->
+                <div class="code-line">
+                    <span class="dim">{{DEMO_LINE_1_PREFIX}}</span>
+                    "<span class="secret" data-mask="{{DEMO_LINE_1_MASK}}">{{DEMO_LINE_1_SECRET}}</span>"
+                </div>
+                <!-- Line 2 -->
+                <div class="code-line">
+                    <span class="dim">{{DEMO_LINE_2_PREFIX}}</span>
+                    "<span class="secret" data-mask="{{DEMO_LINE_2_MASK}}">{{DEMO_LINE_2_SECRET}}</span>"
+                </div>
+                <!-- Line 3 -->
+                <div class="code-line">
+                    <span class="dim">{{DEMO_LINE_3_PREFIX}}</span>
+                    <span class="secret" data-mask="{{DEMO_LINE_3_MASK}}">{{DEMO_LINE_3_SECRET}}</span>
+                </div>
+                <!-- Line 4 -->
+                <div class="code-line">
+                    <span class="dim">{{DEMO_LINE_4_PREFIX}}</span>
+                    "<span class="secret" data-mask="{{DEMO_LINE_4_MASK}}">{{DEMO_LINE_4_SECRET}}</span>"
+                </div>
+                <!-- Add or remove lines as needed -->
+            </div>
+            <button class="demo-btn" id="maskBtn" onclick="toggleMask()">
+                <span class="demo-btn-icon">▶</span> {{DEMO_BTN_LABEL}}
+            </button>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 5 — HOW IT WORKS (architecture diagram)
+         Purpose: Explain the data flow without requiring SVG assets.
+         The layout uses pure HTML/CSS boxes and arrows.
+
+         Replace:
+           {{HOW_HEADING}}           — section title
+           {{HOW_INTRO}}             — 1-2 sentence description
+           {{ARCH_LEFT_ZONE}}        — left zone label (e.g. "Your machine")
+           {{ARCH_LEFT_TOP_ICON}}    — icon/emoji for top-left box
+           {{ARCH_LEFT_TOP_TITLE}}   — title for top-left box
+           {{ARCH_LEFT_TOP_SUB}}     — subtitle for top-left box
+           {{ARCH_MIDDLE_TITLE}}     — title for the central processing box
+           {{ARCH_MIDDLE_SUB}}       — subtitle (e.g. localhost:8080)
+           {{ARCH_STEP_1_LABEL}}     — first processing step label
+           {{ARCH_STEP_1_CODE}}      — code example for step 1
+           {{ARCH_STEP_2_LABEL}}     — second processing step label
+           {{ARCH_STEP_2_CODE}}      — code example for step 2
+           {{ARCH_STEP_3_LABEL}}     — third processing step label
+           {{ARCH_STEP_3_CODE}}      — code example for step 3
+           {{ARCH_STEP_4_LABEL}}     — fourth processing step label
+           {{ARCH_STEP_4_CODE}}      — code example for step 4
+           {{ARCH_RIGHT_ZONE}}       — right zone label (e.g. "Cloud / API")
+           {{ARCH_RIGHT_ICON}}       — icon/emoji for right box
+           {{ARCH_RIGHT_TITLE}}      — title for right box
+           {{ARCH_RIGHT_SUB}}        — subtitle
+           {{ARCH_SEES_LABEL}}       — "What they see" label
+           {{ARCH_SEES_CODE}}        — sanitised code the external service sees
+           {{ARCH_NOT_LABEL}}        — "What they don't see" label
+           {{ARCH_NOT_CODE}}         — struck-through original values
+           {{HOW_HIGHLIGHT_*}}       — 3 bullet-point highlights below diagram
+         ============================================================ -->
+    <section class="section section-dark animate-in" id="how">
+        <h2 class="section-heading">{{HOW_HEADING}}</h2>
+        <p class="section-intro">{{HOW_INTRO}}</p>
+
+        <!-- Architecture diagram — HTML/CSS, no SVG required -->
+        <div class="bigpic">
+
+            <!-- Left column: local side -->
+            <div class="bigpic-col">
+                <div class="bigpic-zone">
+                    <div class="bigpic-zone-label">{{ARCH_LEFT_ZONE}}</div>
+
+                    <!-- Top box: input component (AI assistant / user tool) -->
+                    <div class="bigpic-box bigpic-assistant">
+                        <div class="bigpic-icon">{{ARCH_LEFT_TOP_ICON}}</div>
+                        <div class="bigpic-title">{{ARCH_LEFT_TOP_TITLE}}</div>
+                        <div class="bigpic-sub">{{ARCH_LEFT_TOP_SUB}}</div>
+                    </div>
+
+                    <div class="bigpic-arrow-down">
+                        <span>{{ARCH_ARROW_DOWN_LABEL}}</span>
+                        <div class="bigpic-arrow-line"></div>
+                    </div>
+
+                    <!-- Centre box: the tool itself -->
+                    <div class="bigpic-box bigpic-proxy">
+                        <div class="bigpic-title">{{ARCH_MIDDLE_TITLE}}</div>
+                        <div class="bigpic-sub">{{ARCH_MIDDLE_SUB}}</div>
+                        <div class="bigpic-inner-grid">
+                            <div class="bigpic-inner">
+                                <div class="bigpic-inner-label">{{ARCH_STEP_1_LABEL}}</div>
+                                <code>{{ARCH_STEP_1_CODE}}</code>
+                            </div>
+                            <div class="bigpic-inner">
+                                <div class="bigpic-inner-label">{{ARCH_STEP_2_LABEL}}</div>
+                                <code>{{ARCH_STEP_2_CODE}}</code>
+                            </div>
+                            <div class="bigpic-inner">
+                                <div class="bigpic-inner-label">{{ARCH_STEP_3_LABEL}}</div>
+                                <code>{{ARCH_STEP_3_CODE}}</code>
+                            </div>
+                            <div class="bigpic-inner">
+                                <div class="bigpic-inner-label">{{ARCH_STEP_4_LABEL}}</div>
+                                <code>{{ARCH_STEP_4_CODE}}</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bigpic-arrow-up">
+                        <div class="bigpic-arrow-line"></div>
+                        <span>{{ARCH_ARROW_UP_LABEL}}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle: left-right connection arrows -->
+            <div class="bigpic-connection">
+                <div class="bigpic-conn-out">
+                    <div class="bigpic-conn-arrow">→</div>
+                    <div class="bigpic-conn-label">{{ARCH_CONN_OUT_LABEL}}</div>
+                </div>
+                <div class="bigpic-conn-divider"></div>
+                <div class="bigpic-conn-in">
+                    <div class="bigpic-conn-arrow">←</div>
+                    <div class="bigpic-conn-label">{{ARCH_CONN_IN_LABEL}}</div>
+                </div>
+            </div>
+
+            <!-- Right column: external side -->
+            <div class="bigpic-col">
+                <div class="bigpic-zone bigpic-zone-cloud">
+                    <div class="bigpic-zone-label">{{ARCH_RIGHT_ZONE}}</div>
+                    <div class="bigpic-box bigpic-api">
+                        <div class="bigpic-icon">{{ARCH_RIGHT_ICON}}</div>
+                        <div class="bigpic-title">{{ARCH_RIGHT_TITLE}}</div>
+                        <div class="bigpic-sub">{{ARCH_RIGHT_SUB}}</div>
+                        <div class="bigpic-api-sees">
+                            <div class="bigpic-inner-label">{{ARCH_SEES_LABEL}}</div>
+                            <code>{{ARCH_SEES_CODE}}</code>
+                        </div>
+                        <div class="bigpic-api-not">
+                            <div class="bigpic-inner-label">{{ARCH_NOT_LABEL}}</div>
+                            <code class="flow-strike flow-dim">{{ARCH_NOT_CODE}}</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Three highlight bullets below the diagram -->
+        <div class="how-highlights">
+            <div class="how-item">{{HOW_HIGHLIGHT_1}}</div>
+            <div class="how-item">{{HOW_HIGHLIGHT_2}}</div>
+            <div class="how-item">{{HOW_HIGHLIGHT_3}}</div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 6 — WHAT IT DOES (detection / feature grid 3×3)
+         Purpose: Scan-able overview of covered use cases or
+         detection categories. Works well for security tools,
+         linters, formatters, and analyzers.
+
+         Replace:
+           {{GRID_HEADING}}        — section heading
+           {{GRID_INTRO}}          — intro sentence (mention the 9-item grid)
+           {{GRID_ITEM_*_EXAMPLE}} — short code-style example (shown in mono)
+           {{GRID_ITEM_*_NAME}}    — category name shown below the example
+         ============================================================ -->
+    <section class="section animate-in">
+        <h2 class="section-heading">{{GRID_HEADING}}</h2>
+        <p class="section-intro">{{GRID_INTRO}}</p>
+
+        <div class="detect-grid">
+            <!-- Row 1 -->
+            <div class="detect-item">
+                <div class="detect-example">{{GRID_ITEM_1_EXAMPLE}}</div>
+                <div class="detect-name">{{GRID_ITEM_1_NAME}}</div>
+            </div>
+            <div class="detect-item">
+                <div class="detect-example">{{GRID_ITEM_2_EXAMPLE}}</div>
+                <div class="detect-name">{{GRID_ITEM_2_NAME}}</div>
+            </div>
+            <div class="detect-item">
+                <div class="detect-example">{{GRID_ITEM_3_EXAMPLE}}</div>
+                <div class="detect-name">{{GRID_ITEM_3_NAME}}</div>
+            </div>
+            <!-- Row 2 -->
+            <div class="detect-item">
+                <div class="detect-example">{{GRID_ITEM_4_EXAMPLE}}</div>
+                <div class="detect-name">{{GRID_ITEM_4_NAME}}</div>
+            </div>
+            <div class="detect-item">
+                <div class="detect-example">{{GRID_ITEM_5_EXAMPLE}}</div>
+                <div class="detect-name">{{GRID_ITEM_5_NAME}}</div>
+            </div>
+            <div class="detect-item">
+                <div class="detect-example">{{GRID_ITEM_6_EXAMPLE}}</div>
+                <div class="detect-name">{{GRID_ITEM_6_NAME}}</div>
+            </div>
+            <!-- Row 3 -->
+            <div class="detect-item">
+                <div class="detect-example">{{GRID_ITEM_7_EXAMPLE}}</div>
+                <div class="detect-name">{{GRID_ITEM_7_NAME}}</div>
+            </div>
+            <div class="detect-item">
+                <div class="detect-example">{{GRID_ITEM_8_EXAMPLE}}</div>
+                <div class="detect-name">{{GRID_ITEM_8_NAME}}</div>
+            </div>
+            <div class="detect-item">
+                <div class="detect-example">{{GRID_ITEM_9_EXAMPLE}}</div>
+                <div class="detect-name">{{GRID_ITEM_9_NAME}}</div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 7 — FEATURES (4 cards with icons)
+         Purpose: Highlight secondary / complementary capabilities.
+         Keep each card focused on one behaviour, not a buzzword.
+
+         Replace:
+           {{FEATURES_HEADING}}    — section heading
+           {{FEATURE_*_TITLE}}     — card heading (3-5 words)
+           {{FEATURE_*_DESC}}      — card description (2-3 sentences)
+           {{FEATURE_*_CODE}}      — optional inline code reference
+                                     (remove <code> tags if unused)
+
+         The SVG icons below are generic — replace stroke="#a78bfa"
+         paths with your own icons or swap for emoji/text.
+         ============================================================ -->
+    <section class="section section-dark animate-in">
+        <h2 class="section-heading">{{FEATURES_HEADING}}</h2>
+        <div class="feature-grid">
+
+            <!-- Card 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <!-- Power/toggle icon — replace as needed -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" aria-hidden="true">
+                        <path d="M18.36 6.64a9 9 0 11-12.73 0" stroke-linecap="round"/>
+                        <line x1="12" y1="2" x2="12" y2="12" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>{{FEATURE_1_TITLE}}</h3>
+                <p>{{FEATURE_1_DESC}}</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <!-- Terminal/CLI icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" aria-hidden="true">
+                        <polyline points="4 17 10 11 4 5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="12" y1="19" x2="20" y2="19" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>{{FEATURE_2_TITLE}}</h3>
+                <p>{{FEATURE_2_DESC}}</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <!-- Lock icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" aria-hidden="true">
+                        <rect x="3" y="11" width="18" height="11" rx="2"/>
+                        <path d="M7 11V7a5 5 0 0110 0v4" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>{{FEATURE_3_TITLE}}</h3>
+                <p>{{FEATURE_3_DESC}}</p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <!-- Search/inspect icon -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.5" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>{{FEATURE_4_TITLE}}</h3>
+                <p>{{FEATURE_4_DESC}} Run <code>{{FEATURE_4_CODE}}</code> to see a full report.</p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 8 — FAQ (5 collapsible items)
+         Purpose: Pre-empt objections and concerns. Each question
+         should be something a skeptical visitor would actually ask.
+
+         Replace:
+           {{FAQ_HEADING}}   — section heading
+           {{FAQ_*_Q}}       — question text (shown as summary)
+           {{FAQ_*_A}}       — answer text (hidden until expanded)
+         ============================================================ -->
+    <section class="section animate-in">
+        <h2 class="section-heading">{{FAQ_HEADING}}</h2>
+        <div class="faq">
+
+            <details class="faq-item">
+                <summary>{{FAQ_1_Q}}</summary>
+                <p>{{FAQ_1_A}}</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>{{FAQ_2_Q}}</summary>
+                <p>{{FAQ_2_A}}</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>{{FAQ_3_Q}}</summary>
+                <p>{{FAQ_3_A}}</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>{{FAQ_4_Q}}</summary>
+                <p>{{FAQ_4_A}}</p>
+            </details>
+
+            <details class="faq-item">
+                <summary>{{FAQ_5_Q}}</summary>
+                <p>{{FAQ_5_A}}</p>
+            </details>
+
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 9 — QUICK START (3 numbered steps)
+         Purpose: Make the first 60 seconds concrete. Each step has
+         a title, a prose description, and a copyable code block.
+
+         Replace:
+           {{QS_HEADING}}        — section heading
+           {{STEP_*_TITLE}}      — step title (verb-first, e.g. "Install")
+           {{STEP_*_DESC}}       — 1-2 sentence description; use <a> for links
+           {{STEP_*_CODE}}       — the actual shell command(s)
+           {{STEP_*_CODE_COMMENT}} — optional inline comment (dim colour)
+         ============================================================ -->
+    <section class="section section-dark animate-in">
+        <h2 class="section-heading">{{QS_HEADING}}</h2>
+        <div class="quickstart">
+
+            <div class="qs-step">
+                <div class="qs-number">1</div>
+                <div class="qs-content">
+                    <div class="qs-title">{{STEP_1_TITLE}}</div>
+                    <p class="qs-desc">{{STEP_1_DESC}}</p>
+                    <pre class="code-block">{{STEP_1_CODE}}</pre>
+                </div>
+            </div>
+
+            <div class="qs-step">
+                <div class="qs-number">2</div>
+                <div class="qs-content">
+                    <div class="qs-title">{{STEP_2_TITLE}}</div>
+                    <p class="qs-desc">{{STEP_2_DESC}}</p>
+                    <pre class="code-block">{{STEP_2_CODE}}</pre>
+                </div>
+            </div>
+
+            <div class="qs-step">
+                <div class="qs-number">3</div>
+                <div class="qs-content">
+                    <div class="qs-title">{{STEP_3_TITLE}}</div>
+                    <p class="qs-desc">{{STEP_3_DESC}}</p>
+                    <pre class="code-block">{{STEP_3_CODE}}  <span class="dim"># {{STEP_3_CODE_COMMENT}}</span></pre>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 10 — STORY ("Why this exists")
+         Purpose: Human motivation behind the project. Builds trust
+         and separates the project from generic OSS tools.
+         Keep this personal and specific — avoid corporate language.
+
+         Replace:
+           {{STORY_HEADING}} — section heading (usually "Why this exists")
+           {{STORY_P1}}      — opening paragraph (the observation/problem)
+           {{STORY_P2}}      — middle paragraph (specific moment / story)
+           {{STORY_P3}}      — closing paragraph (belief / call to action)
+         ============================================================ -->
+    <section class="section section-story animate-in">
+        <h2 class="section-heading">{{STORY_HEADING}}</h2>
+        <div class="story-content">
+            <p>{{STORY_P1}}</p>
+            <p>{{STORY_P2}}</p>
+            <p>{{STORY_P3}}</p>
+        </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 11 — FOOTER
+         Purpose: Navigation to related resources + license statement.
+
+         Replace:
+           {{GITHUB_URL}}        — GitHub repo link
+           {{FOOTER_LINK_2_URL}} — second link (e.g. architecture doc)
+           {{FOOTER_LINK_2_TXT}} — second link label (e.g. "Architecture")
+           {{FOOTER_LINK_3_URL}} — third link (e.g. README)
+           {{FOOTER_LINK_3_TXT}} — third link label (e.g. "Docs")
+           {{FOOTER_TAGLINE}}    — one-liner mission statement
+         ============================================================ -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="{{GITHUB_URL}}">GitHub</a>
+            <span class="footer-sep">·</span>
+            <a href="{{FOOTER_LINK_2_URL}}">{{FOOTER_LINK_2_TXT}}</a>
+            <span class="footer-sep">·</span>
+            <a href="{{FOOTER_LINK_3_URL}}">{{FOOTER_LINK_3_TXT}}</a>
+        </div>
+        <p class="dim">{{FOOTER_TAGLINE}}</p>
+    </footer>
+
+</div><!-- /.container -->
+
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/**
+ * Scroll-triggered fade-in animation.
+ * Watches every .animate-in element. When it enters the viewport
+ * (10 % threshold) the class "visible" is added, triggering the
+ * CSS transition defined in github-presence.css.
+ */
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+
+
+/**
+ * toggleMask()
+ * Drives the Before/After demo in Section 4.
+ *
+ * - Each element with class .secret carries a data-mask attribute
+ *   containing the placeholder value (e.g. "[API_KEY_1]").
+ * - On first click: saves the original text to data-original,
+ *   replaces textContent with data-mask, adds .is-masked class.
+ * - On second click: restores data-original, removes .is-masked.
+ * - Items are revealed/hidden with a staggered 150 ms delay each.
+ *
+ * Expected CSS in github-presence.css:
+ *   .secret          { color: var(--color-danger); }
+ *   .secret.is-masked { color: var(--color-safe); }
+ *
+ * Adapt the button label text to fit your tool's terminology.
+ */
+let masked = false;
+
+function toggleMask() {
+    masked = !masked;
+    const btn = document.getElementById('maskBtn');
+
+    document.querySelectorAll('.secret').forEach((el, i) => {
+        setTimeout(() => {
+            if (masked) {
+                el.dataset.original = el.textContent;
+                el.textContent      = el.dataset.mask;
+                el.classList.add('is-masked');
+            } else {
+                el.textContent = el.dataset.original;
+                el.classList.remove('is-masked');
+            }
+        }, i * 150);
+    });
+
+    // Update button label after all transitions complete
+    setTimeout(() => {
+        btn.innerHTML = masked
+            ? '<span class="demo-btn-icon">↺</span> {{DEMO_BTN_REVEAL_LABEL}}'
+            : '<span class="demo-btn-icon">▶</span> {{DEMO_BTN_LABEL}}';
+    }, masked ? 600 : 0);
+}
+</script>
+
+</body>
+</html>
