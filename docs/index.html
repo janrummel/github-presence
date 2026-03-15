@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Presence — Quality framework for GitHub repos</title>
+    <meta name="description" content="Type-specific checklists, a design playbook, and a review skill for Claude Code. Make every repo professional, consistent, and measurable.">
+    <meta property="og:title" content="GitHub Presence">
+    <meta property="og:description" content="Quality framework for GitHub repos. Type-specific checklists, tiered scoring, automated review.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://janrummel.github.io/github-presence/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="GitHub Presence">
+    <meta name="twitter:description" content="Quality framework for GitHub repos. Type-specific checklists, tiered scoring, automated review.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ── Comparison ── */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 600px) {
+            .comparison { grid-template-columns: 1fr; }
+        }
+        .comparison-col {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .comparison-col h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .comparison-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .comparison-col li {
+            font-size: 14px;
+            color: var(--text-dim);
+            line-height: 1.5;
+            padding-left: 24px;
+            position: relative;
+        }
+        .comparison-col li::before {
+            position: absolute;
+            left: 0;
+            font-size: 13px;
+        }
+        .col-without {
+            border-color: var(--danger-dim);
+        }
+        .col-without li::before {
+            content: '✗';
+            color: var(--danger);
+        }
+        .col-with {
+            border-color: rgba(88, 166, 255, 0.2);
+        }
+        .col-with li::before {
+            content: '✓';
+            color: var(--accent);
+        }
+
+        /* ── Project Types Grid ── */
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+        .type-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .type-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        .type-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .type-card h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin-bottom: 4px;
+        }
+        .type-card p {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        /* ── Quality Tiers ── */
+        .tiers {
+            display: flex;
+            gap: 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .tier {
+            padding: 16px 24px;
+            text-align: center;
+            flex: 1;
+            min-width: 140px;
+            position: relative;
+        }
+        .tier:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 20%;
+            height: 60%;
+            width: 1px;
+            background: var(--border);
+        }
+        .tier-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .tier h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .tier p {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+        .tier-bronze h3 { color: #cd7f32; }
+        .tier-silver h3 { color: #c0c0c0; }
+        .tier-gold h3 { color: #ffd700; }
+        .tier-platinum h3 { color: #e5e4e2; }
+        .tier-arrow {
+            display: flex;
+            align-items: center;
+            color: var(--text-dim);
+            font-size: 18px;
+            padding: 0 4px;
+        }
+        @media (max-width: 600px) {
+            .tiers { flex-direction: column; align-items: stretch; }
+            .tier:not(:last-child)::after {
+                right: 20%;
+                top: auto;
+                bottom: 0;
+                height: 1px;
+                width: 60%;
+            }
+            .tier-arrow { justify-content: center; transform: rotate(90deg); }
+        }
+
+        /* ── Story ── */
+        .story-text {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 1.8;
+            max-width: 620px;
+        }
+        .story-text p + p {
+            margin-top: 16px;
+        }
+
+        /* ── Feature grid override for 3 cards ── */
+        .feature-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        @media (max-width: 768px) {
+            .feature-grid-3 { grid-template-columns: 1fr; }
+        }
+
+        /* ── Hero image ── */
+        .hero-gem {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 24px;
+        }
+
+        /* ── h2 link reset ── */
+        h2 a {
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+<h1 class="sr-only">GitHub Presence — Quality framework for GitHub repos</h1>
+
+<div class="container">
+
+    <!-- ═══ Hero ═══ -->
+    <header class="hero" id="top">
+        <img src="https://em-content.zobj.net/source/apple/391/gem-stone_1f48e.png" width="80" height="80" alt="" class="hero-gem">
+        <h2 class="section-heading" style="font-size: 36px; margin-bottom: 0;">GitHub Presence</h2>
+        <p class="tagline">Quality framework for GitHub repos. Type-specific checklists, a design playbook, and a review skill for Claude Code.</p>
+        <div class="badges">
+            <span class="badge badge-accent">Phase 1-3</span>
+            <span class="badge">5 Project Types</span>
+            <span class="badge">MIT License</span>
+        </div>
+        <div class="cta">
+            <a href="#quick-start" class="btn-primary">Get Started</a>
+            <a href="https://github.com/janrummel/github-presence" class="btn-secondary">View on GitHub</a>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ═══ The Problem ═══ -->
+        <section class="section animate-in">
+            <p class="section-label">The Problem</p>
+            <h2 class="section-heading">Every repo starts from scratch</h2>
+            <p class="section-intro">
+                There's no shared standard for what a CLI tool README needs vs. a learning path vs. a checklist project. Quality depends on the day, not on the type.
+            </p>
+        </section>
+
+        <!-- ═══ Without / With ═══ -->
+        <section class="section animate-in">
+            <p class="section-label">Comparison</p>
+            <h2 class="section-heading">Without vs. With</h2>
+            <div class="comparison" style="margin-top: 24px;">
+                <div class="comparison-col col-without">
+                    <h3>Without</h3>
+                    <ul>
+                        <li>Ad-hoc READMEs, whatever feels right</li>
+                        <li>Quality is subjective and inconsistent</li>
+                        <li>Manual review, easy to miss things</li>
+                        <li>"I should probably add a FAQ..."</li>
+                    </ul>
+                </div>
+                <div class="comparison-col col-with">
+                    <h3>With GitHub Presence</h3>
+                    <ul>
+                        <li>Type-specific checklists (CLI ≠ course ≠ checklist)</li>
+                        <li>Tiered scoring: Bronze → Silver → Gold → Platinum</li>
+                        <li>Automated skill checks every criterion</li>
+                        <li>"For Gold you need: FAQ, Contributing, Mobile"</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ What's Inside ═══ -->
+        <section class="section-dark section animate-in">
+            <p class="section-label">What's Inside</p>
+            <h2 class="section-heading">Three components, one system</h2>
+            <p class="section-intro">Everything you need to make your repos consistent and professional.</p>
+            <div class="feature-grid-3">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Review Skill</h3>
+                    <p>Automated quality check via Claude Code. Detects project type, checks against tier-specific criteria, reports PASS/FAIL.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>Playbook</h3>
+                    <p>24-section design knowledge base. Terminal mockups, dark themes, scroll animations, FAQ patterns — everything for a professional landing page.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Templates</h3>
+                    <p>5 README templates + landing page HTML template. Copy, fill placeholders, ship. One template per project type.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ Project Types ═══ -->
+        <section class="section animate-in" id="project-types">
+            <p class="section-label">Project Types</p>
+            <h2 class="section-heading">Five types, five checklists</h2>
+            <p class="section-intro">Each project type has different needs. A CLI tool is not a course is not a checklist. The review skill detects your type automatically.</p>
+            <div class="types-grid" style="margin-top: 24px;">
+                <div class="type-card">
+                    <div class="type-icon">🔧</div>
+                    <h3>CLI Tool</h3>
+                    <p>Build tools, proxies, linters. Terminal demos, install commands.</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">📚</div>
+                    <h3>Learning Path</h3>
+                    <p>Tutorials, curricula. Chapter navigation, progress tracking.</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">🏗</div>
+                    <h3>Framework</h3>
+                    <p>Templates, scaffolds. Architecture diagrams, starter vs. full.</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">✅</div>
+                    <h3>Checklist</h3>
+                    <p>Security guides, references. Interactive elements, printable.</p>
+                </div>
+                <div class="type-card">
+                    <div class="type-icon">⚡</div>
+                    <h3>Mini Tool</h3>
+                    <p>Scripts, proof of concepts. Minimal — problem + run command.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ Quality Tiers ═══ -->
+        <section class="section-dark section animate-in" id="quality-tiers">
+            <p class="section-label">Quality Tiers</p>
+            <h2 class="section-heading">Bronze to Platinum</h2>
+            <p class="section-intro">Tiers are cumulative — Gold includes everything from Bronze and Silver. A single FAIL means the tier is not reached.</p>
+            <div class="tiers" style="margin-top: 24px;">
+                <div class="tier tier-bronze">
+                    <div class="tier-icon">🥉</div>
+                    <h3>Bronze</h3>
+                    <p>Problem + Install + Usage. Good enough for experiments.</p>
+                </div>
+                <div class="tier tier-silver">
+                    <div class="tier-icon">🥈</div>
+                    <h3>Silver</h3>
+                    <p>+ Architecture, Config, Tests. For active projects.</p>
+                </div>
+                <div class="tier tier-gold">
+                    <div class="tier-icon">🥇</div>
+                    <h3>Gold</h3>
+                    <p>+ FAQ, Contributing, Landing Page. Public release ready.</p>
+                </div>
+                <div class="tier tier-platinum">
+                    <div class="tier-icon">💎</div>
+                    <h3>Platinum</h3>
+                    <p>+ Cross-references, API docs. Ecosystem component.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ Quick Start ═══ -->
+        <section class="section animate-in" id="quick-start">
+            <p class="section-label">Quick Start</p>
+            <h2 class="section-heading">Three steps to better repos</h2>
+            <div class="quickstart" style="margin-top: 24px;">
+                <div class="qs-step">
+                    <div class="qs-number">1</div>
+                    <div class="qs-content">
+                        <div class="qs-title">Clone the repo</div>
+                        <div class="code-block">git clone https://github.com/janrummel/github-presence.git</div>
+                    </div>
+                </div>
+                <div class="qs-step">
+                    <div class="qs-number">2</div>
+                    <div class="qs-content">
+                        <div class="qs-title">Copy the skill to your Claude Code skills directory</div>
+                        <div class="code-block">cp -r github-presence/skill/ ~/.claude/skills/website-review/</div>
+                    </div>
+                </div>
+                <div class="qs-step">
+                    <div class="qs-number">3</div>
+                    <div class="qs-content">
+                        <div class="qs-title">Run <code>/website-review</code> in any repo</div>
+                        <p class="qs-desc">Navigate to any of your projects in <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code</a> and type <code>/website-review</code>. The skill detects your project type, suggests a target tier, and reports PASS/FAIL for every criterion.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══ FAQ ═══ -->
+        <section class="section animate-in" id="faq">
+            <p class="section-label">FAQ</p>
+            <h2 class="section-heading">Common questions</h2>
+            <div class="faq" style="margin-top: 24px;">
+                <details class="faq-item">
+                    <summary>What is this exactly?</summary>
+                    <p>A quality framework that defines what a good GitHub repo looks like for different project types (CLI tools, courses, frameworks, checklists, mini tools) and provides a Claude Code skill to automatically check your repos against those standards.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Do I need Claude Code?</summary>
+                    <p>For the automated review skill, yes. The playbook, project types, and checklists are useful on their own as reference material — no tools needed.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can I add my own project type?</summary>
+                    <p>Yes. Create a new checklist file in <code>skill/checklists/</code> following the same format (criteria grouped by tier, with IDs). The skill will pick it up automatically.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>What counts as Gold?</summary>
+                    <p>All Bronze + Silver + Gold criteria for your project type must PASS. One FAIL means the tier is not reached. The review skill shows exactly what's missing.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How do I contribute?</summary>
+                    <p>New checklists, playbook improvements, and templates are all welcome. Please open an issue before submitting large changes.</p>
+                </details>
+            </div>
+        </section>
+
+        <!-- ═══ Story ═══ -->
+        <section class="section-dark section animate-in" id="story">
+            <p class="section-label">Why this exists</p>
+            <h2 class="section-heading">The story</h2>
+            <div class="story-text">
+                <p>Started with 6 repos that all looked different. Different README structures, different quality levels, no shared patterns. Every new project meant reinventing the wheel — what sections to include, how to structure the landing page, what makes a good FAQ.</p>
+                <p>So I built a system. Defined 5 project types, created tier-based checklists, wrote a 24-section playbook with everything I learned about landing pages. Then automated the review with a Claude Code skill that checks every criterion and tells you exactly what's missing.</p>
+                <p>Now quality is consistent and measurable. Not perfect — measurable. And that changes how you think about your repos.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ═══ Footer ═══ -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://github.com/janrummel/github-presence">GitHub</a>
+            <span class="footer-sep">·</span>
+            <a href="#quick-start">Quick Start</a>
+            <span class="footer-sep">·</span>
+            <a href="#faq">FAQ</a>
+        </div>
+        <p class="dim">MIT License · Quality framework for GitHub repos</p>
+    </footer>
+
+</div>
+
+<!-- ═══ Scroll Animation ═══ -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+    });
+</script>
+
+</body>
+</html>
