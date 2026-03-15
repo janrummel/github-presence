@@ -98,7 +98,7 @@ Tiers are cumulative — Gold includes everything from Bronze and Silver.
 
 - [x] **Phase 1:** Review skill with 5 type-specific checklists
 - [x] **Phase 2:** README templates per project type (5 templates)
-- [ ] **Phase 3:** Shared design system (CSS kit for consistent dark-theme landing pages)
+- [x] **Phase 3:** Shared design system + landing page template
 
 ## FAQ
 
