@@ -10,6 +10,7 @@
 </p>
 
 <p align="center">
+  <a href="https://janrummel.github.io/github-presence/">Website</a> ·
   <a href="#quick-start">Quick Start</a> ·
   <a href="#whats-inside">What's Inside</a> ·
   <a href="#project-types">Project Types</a> ·
@@ -17,7 +18,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/phase-1%20of%203-blue" alt="Phase">
+  <img src="https://img.shields.io/badge/phase-1--3%20✓-blue" alt="Phase">
   <img src="https://img.shields.io/badge/types-5-orange" alt="Types">
   <img src="https://img.shields.io/badge/license-MIT-lightgrey" alt="License">
 </p>
@@ -44,8 +45,9 @@ Every GitHub repo starts from scratch when it comes to README and website qualit
 | **Review Skill** (`skill/`) | Ready | Claude Code skill that checks your repo against type-specific checklists |
 | **Playbook** (`playbook.md`) | Ready | 24-section design knowledge base for GitHub Pages landing pages |
 | **Project Types** (`project-types.md`) | Ready | 5 project types with README + website requirements per quality tier |
-| **Templates** (`templates/`) | Planned | README and website templates per project type |
-| **Design System** (`design-system/`) | Planned | Shared CSS kit (dark theme, terminals, cards, FAQ, grids) |
+| **Templates** (`templates/`) | Ready | 5 README templates + landing page HTML template per project type |
+| **Design System** (`design-system/`) | Ready | Shared CSS kit (dark theme, terminals, cards, FAQ, grids) |
+| **Website** (`docs/`) | Live | [Landing page](https://janrummel.github.io/github-presence/) with all components in action |
 
 ## Quick Start
 
@@ -99,6 +101,7 @@ Tiers are cumulative — Gold includes everything from Bronze and Silver.
 - [x] **Phase 1:** Review skill with 5 type-specific checklists
 - [x] **Phase 2:** README templates per project type (5 templates)
 - [x] **Phase 3:** Shared design system + landing page template
+- [x] **Website:** Landing page showcasing the framework in action
 
 ## FAQ
 
