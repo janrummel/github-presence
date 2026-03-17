@@ -4,11 +4,19 @@
      Remove HTML comments before publishing.
 -->
 
+<!-- HERO STYLE: Choose one option, delete the other.
+
+     Option A: Emoji/icon above title (visual anchor, good for visual topics)
 <p align="center">
-  <!-- Replace src with your project's emoji image or logo (80px wide) -->
   <img src="{{EMOJI_IMAGE_URL}}" width="80" alt="{{PROJECT_NAME}}">
 </p>
+<h1 align="center">{{PROJECT_NAME}}</h1>
 
+     Option B: Title only (clean typographic look, good for checklists & methods)
+<h1 align="center">{{PROJECT_NAME}}</h1>
+-->
+
+<!-- Using Option B by default. Switch to Option A if you have a strong visual icon. -->
 <h1 align="center">{{PROJECT_NAME}}</h1>
 
 <p align="center">

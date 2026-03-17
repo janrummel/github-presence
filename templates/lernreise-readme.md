@@ -11,20 +11,27 @@
   4. Keep the centered hero block as-is; it sets the visual tone.
   ============================================================ -->
 
-<!-- HERO: Centered block with emoji, title, tagline, badges, nav.
-     - emoji: Pick one that represents the learning domain visually.
-       Use the Apple emoji CDN: https://em-content.zobj.net/source/apple/391/
+<!-- HERO: Centered block with title, tagline, badges, nav.
      - title: Short, punchy. The repo name, properly capitalized.
      - tagline line 1 (strong): The one-line value proposition. What transformation does this course deliver?
      - tagline line 2: Supporting detail — scope (chapters/lessons/etc.) + key differentiator.
      - nav links: 4-5 anchors to the most important sections below.
      - badges: Reflect scope (chapters/levels/lessons), languages, license.
-       Generator: https://shields.io — use consistent color palette per project. -->
+       Generator: https://shields.io — use consistent color palette per project.
 
+     HERO STYLE: Choose one option, delete the other.
+
+     Option A: Emoji/icon above title (visual anchor, good for visual learning topics)
 <p align="center">
   <img src="https://em-content.zobj.net/source/apple/391/{{EMOJI_SLUG}}" width="80" alt="{{PROJECT_NAME}}">
 </p>
+<h1 align="center">{{PROJECT_NAME}}</h1>
 
+     Option B: Title only (clean typographic look)
+<h1 align="center">{{PROJECT_NAME}}</h1>
+-->
+
+<!-- Using Option B by default. Switch to Option A if you have a strong visual icon. -->
 <h1 align="center">{{PROJECT_NAME}}</h1>
 
 <p align="center">

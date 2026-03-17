@@ -54,18 +54,32 @@
            {{HOW_ANCHOR}}      — anchor id of the "How it works" section (e.g. #how)
          ============================================================ -->
     <header class="hero">
-        <h1 class="sr-only">{{PROJECT_NAME}}</h1>
+        <!-- HERO STYLE: Choose one option, delete the others.
 
-        <div class="hero-logo animate-in">
-            <!-- Option A: use an SVG logo file -->
-            <!-- <img src="logo.svg" alt="{{PROJECT_NAME}} logo" class="mascot" width="90" height="90"> -->
+             Option A: SVG logo file
+             <h1 class="sr-only">{{PROJECT_NAME}}</h1>
+             <div class="hero-logo animate-in">
+                 <img src="logo.svg" alt="{{PROJECT_NAME}} logo" class="mascot" width="90" height="90">
+             </div>
 
-            <!-- Option B: large emoji (simpler, works without assets) -->
-            <div class="hero-emoji" aria-hidden="true">{{PROJECT_EMOJI}}</div>
+             Option B: Large emoji (simpler, works without assets)
+             <h1 class="sr-only">{{PROJECT_NAME}}</h1>
+             <div class="hero-logo animate-in">
+                 <div class="hero-emoji" aria-hidden="true">{{PROJECT_EMOJI}}</div>
+             </div>
 
-            <!-- Option C: ASCII art block — paste art between <pre> tags -->
-            <!-- <pre class="logo" aria-label="{{PROJECT_NAME}} ASCII art logo">{{ASCII_ART}}</pre> -->
-        </div>
+             Option C: ASCII art block
+             <h1 class="sr-only">{{PROJECT_NAME}}</h1>
+             <div class="hero-logo animate-in">
+                 <pre class="logo" aria-label="{{PROJECT_NAME}} ASCII art logo">{{ASCII_ART}}</pre>
+             </div>
+
+             Option D: Title only (clean typographic look, no icon)
+             <h1 class="animate-in" style="font-size: 3rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; margin-bottom: 0;">{{PROJECT_NAME}}</h1>
+        -->
+
+        <!-- Using Option D (title only) by default. Switch to A/B/C for visual icons. -->
+        <h1 class="animate-in" style="font-size: 3rem; font-weight: 700; color: var(--text-heading); letter-spacing: -1px; margin-bottom: 0;">{{PROJECT_NAME}}</h1>
 
         <p class="tagline animate-in delay-1">{{TAGLINE}}</p>
 

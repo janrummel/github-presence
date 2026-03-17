@@ -33,10 +33,21 @@
 
 <div align="center">
 
-<!-- Replace with ASCII banner or large emoji relevant to the tool's function -->
+<!-- HERO STYLE: Choose one option, delete the others.
+
+     Option A: ASCII banner (strong visual identity for CLI tools)
 ```
-{{ASCII_BANNER_OR_EMOJI}}
+{{ASCII_BANNER}}
 ```
+
+     Option B: Large emoji (simpler, works without assets)
+```
+{{EMOJI}}
+```
+
+     Option C: Title only (clean typographic look)
+     (just the h1 below, no code block)
+-->
 
 # {{PROJECT_NAME}}
 
