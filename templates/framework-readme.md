@@ -5,19 +5,37 @@
 -->
 
 <!-- HERO STYLE: Choose one option, delete the others.
+     See design-system/ascii-fonts.md for font catalog + gradient palettes.
 
-     Option A: Emoji/icon above title (visual anchor, good for dev tools)
+     Option A: ASCII Art banner (generates attention, dev-culture aesthetic)
+     Generate with: figlet -f "ANSI Shadow" "Project"
+     or compact:    figlet -f "Calvin S" "Project Name"
+<div align="center">
+
+```
+{{ASCII_ART_BANNER}}
+```
+
+</div>
+
+     Option B: Emoji/icon above title (visual anchor)
 <p align="center">
   <img src="{{EMOJI_IMAGE_URL}}" width="80" alt="{{PROJECT_NAME}}">
 </p>
 <h1 align="center">{{PROJECT_NAME}}</h1>
 
-     Option B: Title only (clean typographic look, good for frameworks & methods)
+     Option C: Title only (clean typographic look)
 <h1 align="center">{{PROJECT_NAME}}</h1>
 -->
 
-<!-- Using Option B by default. Switch to Option A if you have a strong visual icon. -->
-<h1 align="center">{{PROJECT_NAME}}</h1>
+<!-- Using Option A by default. See design-system/ascii-fonts.md for 5 font choices. -->
+<div align="center">
+
+```
+{{ASCII_ART_BANNER}}
+```
+
+</div>
 
 <p align="center">
   <!-- One strong sentence. What it is + what it gives you. -->
