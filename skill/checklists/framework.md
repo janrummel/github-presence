@@ -6,6 +6,8 @@
 - problem-statement: Was ist es + warum brauchst Du es
 - install-usage: Quick Start (Clone -> Configure -> Run)
 
+- depersonalized: Keine persoenlichen Referenzen ("wir", "unser", "our system", "including ours") — neutrale Stimme fuer oeffentliche Repos
+- repo-metadata: GitHub-Metadaten gesetzt: Description, 5-8 Topics, License-Datei
 ### Silber
 - without-with: Without/With Vergleich
 - architecture: Architecture Overview

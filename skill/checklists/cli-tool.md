@@ -6,6 +6,8 @@
 - problem-statement: Problem-Statement vorhanden (warum braucht man das)
 - install-usage: Install + Usage Anleitung
 
+- depersonalized: Keine persoenlichen Referenzen ("wir", "unser", "our system", "including ours") — neutrale Stimme fuer oeffentliche Repos
+- repo-metadata: GitHub-Metadaten gesetzt: Description, 5-8 Topics, License-Datei
 ### Silber
 - quick-start: Quick Start (max 3 Befehle)
 - configuration: Configuration (YAML/ENV Beispiel)
