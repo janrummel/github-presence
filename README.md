@@ -25,6 +25,8 @@
 
 ---
 
+> **Status: completed (as of July 2026).** No further development; the website stays online and the repository is archived (read-only).
+
 ## The Problem
 
 Every GitHub repo starts from scratch when it comes to README and website quality. There's no shared standard for what a CLI tool README needs vs. a learning path vs. a checklist project. Quality depends on the day, not on the type.
